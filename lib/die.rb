@@ -1,3 +1,4 @@
+require 'byebug'
 class Die
   attr_reader :value
 
@@ -16,5 +17,12 @@ class Die
       -1
     end
   end
+
+  def roll
+    self.value = rand(1..6)
+  end
+
+  private
+  attr_writer :value
 
 end

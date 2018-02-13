@@ -22,6 +22,8 @@ describe Die do
   describe '#<=>' do
     it 'raises an error when compared to a non die object' do
         expect { Die.new(3) <=> 4 }.to raise_error('Not a valid Comparison')
+        expect { Die.new(3) <=> ["test", 4] }.to raise_error('Not a valid Comparison')
+        expect { Die.new(3) <=> "test" }.to raise_error('Not a valid Comparison')
     end
 
     it 'should return 0 when die are the same' do
@@ -36,4 +38,14 @@ describe Die do
       expect(Die.new(1) <=> Die.new(4)).to eq(-1)
     end
   end
+
+  describe '#roll' do
+    subject(:die) { Die.new }
+    it 'should roll the die randomly' do
+      die.roll
+      expect(die.value).to be_between(1, 6)
+    end
+  end
+
+
 end
