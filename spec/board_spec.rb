@@ -49,5 +49,23 @@ describe Board do
     end
   end
 
+  describe "#twos(dice)" do
+    it "should throw an error if dice is not five in length" do
+      dice = [1, 2]
+      expect { board.twos(dice) }.to raise_error("Must be Five Dice!")
+    end
+
+    it "should accuartely add the dice of value 1" do
+      dice = [1, 2, 3, 2, 5]
+      expect(board.twos(dice)).to eq(4)
+    end
+
+    it "should update score_card" do
+      dice = [1, 2, 3, 1, 1]
+      board.twos(dice)
+      expect(board.score_card[:Twos]).to eq(2)
+    end
+  end
+
 
 end

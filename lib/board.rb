@@ -26,7 +26,16 @@ class Board
     sum = 0
     dice.each { |num| sum += num if num == 1 }
     @score_card[:Aces] = sum
-    sum 
+    sum
+  end
+
+  def twos(dice)
+    raise "Must be Five Dice!" unless dice.length == 5
+    sum = 0
+    dice.each { |num| sum += num if num == 2 }
+    @score_card[:Twos] = sum
+    sum
+
   end
 
 end
