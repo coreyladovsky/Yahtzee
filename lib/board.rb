@@ -22,20 +22,25 @@ class Board
   end
 
   def aces(dice)
-    raise "Must be Five Dice!" unless dice.length == 5
-    sum = 0
-    dice.each { |num| sum += num if num == 1 }
-    @score_card[:Aces] = sum
-    sum
+    five_die_error_check(dice)
+    @score_card[:Aces] = number_sum(dice, 1)
   end
 
   def twos(dice)
-    raise "Must be Five Dice!" unless dice.length == 5
-    sum = 0
-    dice.each { |num| sum += num if num == 2 }
-    @score_card[:Twos] = sum
-    sum
+    five_die_error_check(dice)
+    @score_card[:Twos] = number_sum(dice, 2)
+  end
 
+  private
+
+  def number_sum(dice, number)
+    sum = 0
+    dice.each { |num| sum += num if num == number }
+    sum
+  end
+
+  def five_die_error_check(dice)
+    raise "Must be Five Dice!" unless dice.length == 5
   end
 
 end
