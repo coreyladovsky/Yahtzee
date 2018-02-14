@@ -21,4 +21,12 @@ class Board
     @score_card = score_card
   end
 
+  def aces(dice)
+    raise "Must be Five Dice!" unless dice.length == 5
+    sum = 0
+    dice.each { |num| sum += num if num == 1 }
+    @score_card[:Aces] = sum
+    sum 
+  end
+
 end
