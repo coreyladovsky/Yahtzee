@@ -9,6 +9,7 @@ class Board
       Fives: nil,
       Sixes: nil,
       Three_of_a_kind: nil,
+      Full_house: nil,
       Four_of_a_kind: nil,
       Small_straight: nil,
       Large_straight: nil,
@@ -64,6 +65,7 @@ class Board
   end
 
   def small_straight(dice)
+    five_die_error_check(dice)
     sorted_dice = dice.sort.uniq
     small_straight = false
     possibles = [[1, 2, 3, 4,], [2, 3, 4, 5], [3, 4, 5, 6]]
@@ -74,6 +76,13 @@ class Board
       end
     end
     small_straight ? @score_card[:Small_straight] = 30 : @score_card[:Small_straight] = 0
+  end
+
+  def large_straight(dice)
+    five_die_error_check(dice)
+    sorted_dice = dice.sort.uniq
+    sorted_dice == [1, 2, 3, 4, 5] || sorted_dice == [2, 3, 4, 5, 6] ?
+    @score_card[:Large_straight] = 40 : @score_card[:Large_straight] = 0
   end
 
   private

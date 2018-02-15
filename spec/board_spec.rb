@@ -26,7 +26,7 @@ describe Board do
 
     context "when no score_card is passed in" do
       it "creates a score_card with all moves" do
-        expect(board.score_card.keys.length).to eq(12)
+        expect(board.score_card.keys.length).to eq(13)
       end
     end
   end
@@ -180,20 +180,31 @@ describe Board do
 
   describe "#small_straight" do
     it "should throw an error if dice is not five in length" do
-      dice = [1, 2, 3, 4, 5, 6]
-      expect { board.four_of_a_kind(dice) }.to raise_error("Must be Five Dice!")
+      expect { board.small_straight([1, 2, 3, 4, 5, 6]) }.to raise_error("Must be Five Dice!")
     end
     it "should accuartely determine a small_straight" do
-      dice = [3, 6, 4, 6, 5]
-      board.small_straight(dice)
+      board.small_straight([3, 6, 4, 6, 5])
       expect(board.score_card[:Small_straight]).to eq(30)
     end
 
     it "should give a score of zero if there is not a small straight" do
-      dice = [5, 5, 1, 2, 3]
-      board.small_straight(dice)
+      board.small_straight([5, 5, 1, 2, 3])
       expect(board.score_card[:Small_straight]).to eq(0)
+    end
+  end
 
+  describe "#large_straight" do
+    it "should throw an error if dice is not five in length" do
+      expect { board.large_straight([1, 2, 3, 4, 5, 6]) }.to raise_error("Must be Five Dice!")
+    end
+    it "should accuartely determine a large_straight" do
+      board.large_straight([3, 6, 4, 2, 5])
+      expect(board.score_card[:Large_straight]).to eq(40)
+    end
+
+    it "should give a score of zero if there is not a large straight" do
+      board.large_straight([5, 6, 1, 2, 3])
+      expect(board.score_card[:Large_straight]).to eq(0)
     end
   end
 
