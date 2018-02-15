@@ -21,6 +21,7 @@ class Board
 
   def initialize(score_card = new_score_card)
     @score_card = score_card
+    @yahtzee = false
   end
 
   def aces(dice)
@@ -113,6 +114,25 @@ class Board
     five_die_error_check(dice)
     already_used_error(:Chance)
     @score_card[:Chance] = dice.reduce(:+)
+  end
+
+  def yahtzee(dice)
+    five_die_error_check(dice)
+    if dice.all? { |die| die == dice[0] }
+      if !@yahtzee
+        @yahtzee = true
+        @score_card[:Yahtzee] = 50
+      else
+        if @score_card[:Yahtzee] == 0
+          @score_card[:Yahtzee]
+        else
+          @score_card[:Yahtzee] += 100
+        end 
+      end
+    else
+      @yahtzee = true
+      @score_card[:Yahtzee] = 0
+    end
   end
 
   private

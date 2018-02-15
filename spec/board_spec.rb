@@ -295,5 +295,33 @@ describe Board do
     end
   end
 
+  describe "#yahtzee(dice)" do
+    it "should throw an error if dice is not five in length" do
+      expect { board.yahtzee([6, 6, 6, 6]) }.to raise_error("Must be Five Dice!")
+    end
+
+    it "should determine a yahtzee and update the score_card" do
+      board.yahtzee([1, 1, 1, 1, 1])
+      expect(board.score_card[:Yahtzee]).to eq(50)
+    end
+
+    it "should give value of 0 to score care if it is not a yahtzee" do
+      board.yahtzee([1, 2, 1, 1, 1])
+      expect(board.score_card[:Yahtzee]).to eq(0)
+    end
+
+    it "should give a bonus of 100 after each yahtzee" do
+      board.yahtzee([2, 2, 2, 2, 2])
+      board.yahtzee([3, 3, 3, 3, 3])
+      expect(board.score_card[:Yahtzee]).to eq(150)
+    end
+
+    it "should not give a bonus if the first yahtzee was a scratch" do
+      board.yahtzee([1, 2, 1, 1, 1])
+      board.yahtzee([2, 2, 2, 2, 2])
+      expect(board.score_card[:Yahtzee]).to eq(0)
+    end
+  end
+
 
 end
