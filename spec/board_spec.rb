@@ -3,7 +3,21 @@ require 'board'
 
 describe Board do
   let(:board) { Board.new }
-
+  let(:complete_board) { Board.new({
+        Aces: 3,
+        Twos: 6,
+        Threes: 9,
+        Fours: 8,
+        Fives: 20,
+        Sixes: 6,
+        Three_of_a_kind: 18,
+        Four_of_a_kind: 8,
+        Full_house: 25,
+        Small_straight: 30,
+        Large_straight: 0,
+        Yahtzee: 0,
+        Chance: 22
+      })}
   describe "#score_card" do
     it "should expose the board's @score_card instance vairiable" do
       card = board.instance_variable_get(:@score_card)
@@ -320,6 +334,18 @@ describe Board do
       board.yahtzee([1, 2, 1, 1, 1])
       board.yahtzee([2, 2, 2, 2, 2])
       expect(board.score_card[:Yahtzee]).to eq(0)
+    end
+  end
+
+  describe "#upper_section" do
+    it "should add together aces, twos, threes, fours, fives, and sixes" do
+      expect(complete_board.upper_section).to eq(52)
+    end
+  end
+
+  describe "#lower_section" do
+    it "should add together  three_of_a_kind, four_of_a_kind, full_house, small_straight, large_straight, yahtzee, chance" do
+      expect(complete_board.lower_section).to eq(103)
     end
   end
 

@@ -10,8 +10,8 @@ class Board
       Fives: nil,
       Sixes: nil,
       Three_of_a_kind: nil,
-      Full_house: nil,
       Four_of_a_kind: nil,
+      Full_house: nil,
       Small_straight: nil,
       Large_straight: nil,
       Yahtzee: nil,
@@ -127,12 +127,22 @@ class Board
           @score_card[:Yahtzee]
         else
           @score_card[:Yahtzee] += 100
-        end 
+        end
       end
     else
       @yahtzee = true
       @score_card[:Yahtzee] = 0
     end
+  end
+
+  def upper_section
+    @score_card[:Aces] + @score_card[:Twos] + @score_card[:Threes] + @score_card[:Fours] +
+    @score_card[:Fives] + @score_card[:Sixes]
+  end
+
+  def lower_section
+    @score_card[:Three_of_a_kind] + @score_card[:Four_of_a_kind] + @score_card[:Full_house] + @score_card[:Small_straight] +
+    @score_card[:Large_straight] + @score_card[:Yahtzee] + @score_card[:Chance]
   end
 
   private
