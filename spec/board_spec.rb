@@ -67,5 +67,76 @@ describe Board do
     end
   end
 
+  describe "#threes(dice)" do
+    it "should throw an error if dice is not five in length" do
+      dice = [1, 2]
+      expect { board.threes(dice) }.to raise_error("Must be Five Dice!")
+    end
+
+    it "should accuartely add the dice of value 1" do
+      dice = [1, 3, 3, 2, 3]
+      expect(board.threes(dice)).to eq(9)
+    end
+
+    it "should update score_card" do
+      dice = [1, 2, 5, 1, 1]
+      board.threes(dice)
+      expect(board.score_card[:Threes]).to eq(0)
+    end
+  end
+
+  describe "#fours(dice)" do
+    it "should throw an error if dice is not five in length" do
+      dice = [1, 2]
+      expect { board.fours(dice) }.to raise_error("Must be Five Dice!")
+    end
+
+    it "should accuartely add the dice of value 1" do
+      dice = [1, 3, 3, 2, 3]
+      expect(board.fours(dice)).to eq(0)
+    end
+
+    it "should update score_card" do
+      dice = [1, 2, 5, 4, 4]
+      board.fours(dice)
+      expect(board.score_card[:Fours]).to eq(8)
+    end
+  end
+
+  describe "#fives(dice)" do
+    it "should throw an error if dice is not five in length" do
+      dice = [1, 2]
+      expect { board.fives(dice) }.to raise_error("Must be Five Dice!")
+    end
+
+    it "should accuartely add the dice of value 1" do
+      dice = [5, 3, 5, 2, 3]
+      expect(board.fives(dice)).to eq(10)
+    end
+
+    it "should update score_card" do
+      dice = [1, 2, 5, 1, 1]
+      board.fives(dice)
+      expect(board.score_card[:Fives]).to eq(5)
+    end
+  end
+  describe "#sixes(dice)" do
+    it "should throw an error if dice is not five in length" do
+      dice = [1, 2]
+      expect { board.sixes(dice) }.to raise_error("Must be Five Dice!")
+    end
+
+    it "should accuartely add the dice of value 1" do
+      dice = [1, 3, 3, 6, 3]
+      expect(board.sixes(dice)).to eq(6)
+    end
+
+    it "should update score_card" do
+      dice = [1, 6, 5, 6, 1]
+      board.sixes(dice)
+      expect(board.score_card[:Sixes]).to eq(12)
+    end
+  end
+
 
 end

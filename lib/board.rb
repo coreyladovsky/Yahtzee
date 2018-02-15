@@ -31,6 +31,26 @@ class Board
     @score_card[:Twos] = number_sum(dice, 2)
   end
 
+  def threes(dice)
+    five_die_error_check(dice)
+    @score_card[:Threes] = number_sum(dice, 3)
+  end
+
+  def fours(dice)
+    five_die_error_check(dice)
+    @score_card[:Fours] = number_sum(dice, 4)
+  end
+
+  def fives(dice)
+    five_die_error_check(dice)
+    @score_card[:Fives] = number_sum(dice, 5)
+  end
+
+  def sixes(dice)
+    five_die_error_check(dice)
+    @score_card[:Sixes] = number_sum(dice, 6)
+  end
+
   private
 
   def number_sum(dice, number)
