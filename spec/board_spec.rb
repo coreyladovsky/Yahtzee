@@ -138,5 +138,25 @@ describe Board do
     end
   end
 
+  describe "#three_of_a_kind" do
+    it "should throw an error if dice is not five in length" do
+      dice = [1, 2, 3, 4, 5, 6]
+      expect { board.three_of_a_kind(dice) }.to raise_error("Must be Five Dice!")
+    end
+    it "should accuartely add all of the dice" do
+      dice = [5, 3, 1, 5, 5]
+      expect(board.three_of_a_kind(dice)).to eq(19)
+    end
+    it "should update score_card" do
+      dice = [5, 3, 5, 5, 5]
+      board.three_of_a_kind(dice)
+      expect(board.score_card[:Three_of_a_kind]).to eq(23)
+    end
+    it "should give a score of zero if there are not three of a kind" do
+      dice = [5, 5, 1, 2, 3]
+      expect(board.three_of_a_kind(dice)).to eq(0)
+    end
+  end
+
 
 end

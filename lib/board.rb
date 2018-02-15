@@ -51,6 +51,13 @@ class Board
     @score_card[:Sixes] = number_sum(dice, 6)
   end
 
+  def three_of_a_kind(dice)
+    five_die_error_check(dice)
+    threes = false
+    dice.each { |die| threes = true if dice.count(die) >= 3 }
+    @score_card[:Three_of_a_kind] = threes ? dice.reduce(:+) : 0
+  end
+
   private
 
   def number_sum(dice, number)
