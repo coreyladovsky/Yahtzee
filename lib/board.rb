@@ -53,9 +53,14 @@ class Board
 
   def three_of_a_kind(dice)
     five_die_error_check(dice)
-    threes = false
-    dice.each { |die| threes = true if dice.count(die) >= 3 }
-    @score_card[:Three_of_a_kind] = threes ? dice.reduce(:+) : 0
+    @score_card[:Three_of_a_kind] = dice.count(dice.sort[2]) >= 3 ?
+      dice.reduce(:+) : 0
+  end
+
+  def four_of_a_kind(dice)
+    five_die_error_check(dice)
+    @score_card[:Four_of_a_kind] = dice.count(dice.sort[2]) >= 4 ? 
+      dice.reduce(:+) : 0
   end
 
   private
