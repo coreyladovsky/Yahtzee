@@ -47,6 +47,11 @@ describe Board do
       board.aces(dice)
       expect(board.score_card[:Aces]).to eq(3)
     end
+
+    it "should throw an eror if method has already been select" do
+      board.aces([1, 2, 1, 2, 1])
+      expect { board.aces([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
+    end
   end
 
   describe "#twos(dice)" do
@@ -64,6 +69,11 @@ describe Board do
       dice = [1, 2, 3, 1, 1]
       board.twos(dice)
       expect(board.score_card[:Twos]).to eq(2)
+    end
+
+    it "should throw an eror if method has already been select" do
+      board.twos([1, 2, 1, 2, 1])
+      expect { board.twos([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
     end
   end
 
@@ -83,6 +93,11 @@ describe Board do
       board.threes(dice)
       expect(board.score_card[:Threes]).to eq(0)
     end
+
+    it "should throw an eror if method has already been select" do
+      board.threes([1, 2, 1, 2, 1])
+      expect { board.threes([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
+    end
   end
 
   describe "#fours(dice)" do
@@ -100,6 +115,11 @@ describe Board do
       dice = [1, 2, 5, 4, 4]
       board.fours(dice)
       expect(board.score_card[:Fours]).to eq(8)
+    end
+
+    it "should throw an eror if method has already been select" do
+      board.fours([1, 2, 1, 2, 1])
+      expect { board.fours([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
     end
   end
 
@@ -119,7 +139,13 @@ describe Board do
       board.fives(dice)
       expect(board.score_card[:Fives]).to eq(5)
     end
+
+    it "should throw an eror if method has already been select" do
+      board.fives([1, 2, 1, 2, 1])
+      expect { board.fives([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
+    end
   end
+
   describe "#sixes(dice)" do
     it "should throw an error if dice is not five in length" do
       dice = [1, 2]
@@ -135,6 +161,11 @@ describe Board do
       dice = [1, 6, 5, 6, 1]
       board.sixes(dice)
       expect(board.score_card[:Sixes]).to eq(12)
+    end
+
+    it "should throw an eror if method has already been select" do
+      board.sixes([1, 2, 1, 2, 1])
+      expect { board.sixes([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
     end
   end
 
@@ -156,6 +187,11 @@ describe Board do
       dice = [5, 5, 1, 2, 3]
       expect(board.three_of_a_kind(dice)).to eq(0)
     end
+
+    it "should throw an eror if method has already been select" do
+      board.three_of_a_kind([1, 2, 1, 2, 1])
+      expect { board.three_of_a_kind([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
+    end
   end
 
   describe "#four_of_a_kind" do
@@ -176,6 +212,11 @@ describe Board do
       dice = [5, 5, 1, 2, 3]
       expect(board.four_of_a_kind(dice)).to eq(0)
     end
+
+    it "should throw an eror if method has already been select" do
+      board.four_of_a_kind([1, 2, 1, 2, 1])
+      expect { board.four_of_a_kind([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
+    end
   end
 
   describe "#full_house" do
@@ -190,6 +231,11 @@ describe Board do
     it "should give a score of zero if there is not a full house" do
       board.full_house([5, 5, 5, 2, 1])
       expect(board.score_card[:Full_house]).to eq(0)
+    end
+
+    it "should throw an eror if method has already been select" do
+      board.full_house([1, 2, 1, 2, 1])
+      expect { board.full_house([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
     end
   end
 
@@ -206,6 +252,11 @@ describe Board do
       board.small_straight([5, 5, 1, 2, 3])
       expect(board.score_card[:Small_straight]).to eq(0)
     end
+
+    it "should throw an eror if method has already been select" do
+      board.small_straight([1, 2, 1, 2, 1])
+      expect { board.small_straight([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
+    end
   end
 
   describe "#large_straight" do
@@ -220,6 +271,27 @@ describe Board do
     it "should give a score of zero if there is not a large straight" do
       board.large_straight([5, 6, 1, 2, 3])
       expect(board.score_card[:Large_straight]).to eq(0)
+    end
+
+    it "should throw an eror if method has already been select" do
+      board.large_straight([1, 2, 1, 2, 1])
+      expect { board.large_straight([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
+    end
+  end
+
+  describe "#chance" do
+    it "should throw an error if dice is not five in length" do
+      expect { board.chance([1, 2, 3, 4, 5, 6]) }.to raise_error("Must be Five Dice!")
+    end
+
+    it "should add up all dice and add it to the score_card" do
+      board.chance([4, 5, 3, 2, 1])
+      expect(board.score_card[:Chance]).to eq(15)
+    end
+
+    it "will not let me change a current value of chance" do
+      board.chance([4, 5, 3, 2, 1])
+      expect { board.chance([4, 3, 1, 2, 2]) }.to raise_error("Already Been Selected!")
     end
   end
 
