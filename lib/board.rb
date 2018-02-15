@@ -59,8 +59,21 @@ class Board
 
   def four_of_a_kind(dice)
     five_die_error_check(dice)
-    @score_card[:Four_of_a_kind] = dice.count(dice.sort[2]) >= 4 ? 
+    @score_card[:Four_of_a_kind] = dice.count(dice.sort[2]) >= 4 ?
       dice.reduce(:+) : 0
+  end
+
+  def small_straight(dice)
+    sorted_dice = dice.sort.uniq
+    small_straight = false
+    possibles = [[1, 2, 3, 4,], [2, 3, 4, 5], [3, 4, 5, 6]]
+    possibles.each do |possiblity|
+      if possiblity.all? { |num| sorted_dice.count(num) == 1 }
+        small_straight = true
+        break
+      end
+    end
+    small_straight ? @score_card[:Small_straight] = 30 : @score_card[:Small_straight] = 0
   end
 
   private

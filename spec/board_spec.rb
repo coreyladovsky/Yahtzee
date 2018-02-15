@@ -178,5 +178,24 @@ describe Board do
     end
   end
 
+  describe "#small_straight" do
+    it "should throw an error if dice is not five in length" do
+      dice = [1, 2, 3, 4, 5, 6]
+      expect { board.four_of_a_kind(dice) }.to raise_error("Must be Five Dice!")
+    end
+    it "should accuartely determine a small_straight" do
+      dice = [3, 6, 4, 6, 5]
+      board.small_straight(dice)
+      expect(board.score_card[:Small_straight]).to eq(30)
+    end
+
+    it "should give a score of zero if there is not a small straight" do
+      dice = [5, 5, 1, 2, 3]
+      board.small_straight(dice)
+      expect(board.score_card[:Small_straight]).to eq(0)
+
+    end
+  end
+
 
 end
