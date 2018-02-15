@@ -1,3 +1,4 @@
+require 'byebug'
 class Board
   attr_reader :score_card
   def new_score_card
@@ -62,6 +63,18 @@ class Board
     five_die_error_check(dice)
     @score_card[:Four_of_a_kind] = dice.count(dice.sort[2]) >= 4 ?
       dice.reduce(:+) : 0
+  end
+
+  def full_house(dice)
+    five_die_error_check(dice)
+    sorted_dice = dice.sort
+    dice_hash = Hash.new(0)
+    sorted_dice.each { |num| dice_hash[num] += 1 }
+    if dice_hash.keys.count == 2 && dice_hash.values.sort == [2, 3]
+      @score_card[:Full_house] = 25
+    else
+      @score_card[:Full_house] = 0
+    end
   end
 
   def small_straight(dice)

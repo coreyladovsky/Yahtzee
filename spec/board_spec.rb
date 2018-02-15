@@ -178,6 +178,21 @@ describe Board do
     end
   end
 
+  describe "#full_house" do
+    it "should throw an error if dice is not five in length" do
+      expect { board.full_house([1, 2, 3, 4, 5, 6]) }.to raise_error("Must be Five Dice!")
+    end
+    it "should accuartely determine a full_house" do
+      board.full_house([3, 2, 2, 2, 3])
+      expect(board.score_card[:Full_house]).to eq(25)
+    end
+
+    it "should give a score of zero if there is not a full house" do
+      board.full_house([5, 5, 5, 2, 1])
+      expect(board.score_card[:Full_house]).to eq(0)
+    end
+  end
+
   describe "#small_straight" do
     it "should throw an error if dice is not five in length" do
       expect { board.small_straight([1, 2, 3, 4, 5, 6]) }.to raise_error("Must be Five Dice!")
