@@ -168,6 +168,50 @@ class Board
     @score_card[:Large_straight] + @score_card[:Yahtzee] + @score_card[:Chance]
   end
 
+  def display
+    puts "| UPPER SECTION     |   How To Score   | Points "
+    puts " -------------------------------------------------------------"
+    puts "| Aces 1            |   Add All 1s     |   #{@score_card[:Aces] ? @score_card[:Aces] : "  "}     "
+    puts " -------------------------------------------------------------"
+    puts "| Twos 2            |   Add All 2s     |   #{@score_card[:Twos] ? @score_card[:Twos] : "  "}     "
+    puts " -------------------------------------------------------------"
+    puts "| Threes 3          |   Add All 3s     |   #{@score_card[:Threes] ? @score_card[:Threes] : "  "}     "
+    puts " -------------------------------------------------------------"
+    puts "| Fours 4           |   Add All 4s     |   #{@score_card[:Fours] ? @score_card[:Fours] : "  "}     "
+    puts " -------------------------------------------------------------"
+    puts "| Fives 5           |   Add All 5s     |   #{@score_card[:Fives] ? @score_card[:Fives] : "  "}     "
+    puts " -------------------------------------------------------------"
+    puts "| Sixes 6           |   Add All 6s     |   #{@score_card[:Sixes] ? @score_card[:Sixes] : "  "}     "
+    puts " -------------------------------------------------------------"
+    puts "| Total Score       |      ---->       |   #{upper_section_complete? ? @upper_score : "  "}     "
+    puts " -------------------------------------------------------------"
+    puts "| Bonus total > 63  |     Score 35     |   #{upper_section_complete? ? @bonus : "  "}           "
+    puts " -------------------------------------------------------------"
+    puts "| Total of Upper    |      ---->       |   #{upper_section_complete? ? @upper_total : "  "}           "
+    puts " -------------------------------------------------------------"
+    puts
+    puts "| BOTTOM SECTION "
+    puts " -------------------------------------------------------------"
+    puts "| 3 of a kind       |   Add All Die    |   #{@score_card[:Three_of_a_kind] ? @score_card[:Three_of_a_kind] : "  "}     "
+    puts " -------------------------------------------------------------"
+    puts "| 4 of a kind       |   Add All Die    |   #{@score_card[:Four_of_a_kind] ? @score_card[:Four_of_a_kind] : "  "}"
+    puts " -------------------------------------------------------------"
+    puts "| Full House        |     Score 25     |   #{@score_card[:Full_house] ? @score_card[:Full_house] : "  "}"
+    puts " -------------------------------------------------------------"
+    puts "| Small Straight    |     Score 30     |   #{@score_card[:Small_straight] ? @score_card[:Small_straight] : "  "}"
+    puts " -------------------------------------------------------------"
+    puts "| Large Straight    |     Score 40     |   #{@score_card[:Large_straight] ? @score_card[:Large_straight] : "  "}"
+    puts " -------------------------------------------------------------"
+    puts "| YAHTZEE           | Score 50 + Bonus |   #{@score_card[:Yahtzee] ? @score_card[:Yahtzee] : "  "}"
+    puts " -------------------------------------------------------------"
+    puts "| Total of Lower    |      ---->       |   #{lower_section_complete? ? @lower_total : "  "}           "
+    puts " -------------------------------------------------------------"
+    puts "| Total of Upper    |      ---->       |   #{upper_section_complete? ? @upper_total : "  "}           "
+    puts " -------------------------------------------------------------"
+    puts "| GRAND TOTAL       |      ---->       |   #{upper_section_complete? && lower_section_complete? ? @upper_total + @lower_total : "  "}           "
+    puts " -------------------------------------------------------------"
+  end
+
   private
 
   def already_used_error(sym)
@@ -184,29 +228,6 @@ class Board
     raise "Must be Five Dice!" unless dice.length == 5
   end
 
-  def display
-    puts "| UPPER SECTION     |   How To Score   | Points "
-    puts "| Aces 1            |   Add All 1s     |   #{@score_card[:Aces] ? @score_card[:Aces] : "  "}     "
-    puts "| Twos 2            |   Add All 2s     |   #{@score_card[:Twos] ? @score_card[:Twos] : "  "}     "
-    puts "| Threes 3          |   Add All 3s     |   #{@score_card[:Threes] ? @score_card[:Threes] : "  "}     "
-    puts "| Fours 4           |   Add All 4s     |   #{@score_card[:Fours] ? @score_card[:Fours] : "  "}     "
-    puts "| Fives 5           |   Add All 5s     |   #{@score_card[:Fives] ? @score_card[:Fives] : "  "}     "
-    puts "| Sixes 6           |   Add All 6s     |   #{@score_card[:Sixes] ? @score_card[:Sixes] : "  "}     "
-    puts "| Total Score       |      ---->       |   #{upper_section_complete? ? @upper_score : "  "}     "
-    puts "| Bonus total > 63  |     Score 35     |   #{upper_section_complete? ? @bonus : "  "}           "
-    puts "| Total of Upper    |      ---->       |   #{upper_section_complete? ? @upper_total : "  "}           "
-    puts "| BOTTOM SECTION "
-    puts "| 3 of a kind       |   Add All Die    |   #{@score_card[:Three_of_a_kind] ? @score_card[:Three_of_a_kind] : "  "}     "
-    puts "| 4 of a kind       |   Add All Die    |   #{@score_card[:Four_of_a_kind] ? @score_card[:Four_of_a_kind] : "  "}"
-    puts "| Full House        |     Score 25     |   #{@score_card[:Full_house] ? @score_card[:Full_house] : "  "}"
-    puts "| Small Straight    |     Score 30     |   #{@score_card[:Small_straight] ? @score_card[:Small_straight] : "  "}"
-    puts "| Large Straight    |     Score 40     |   #{@score_card[:Large_straight] ? @score_card[:Large_straight] : "  "}"
-    puts "| YAHTZEE           | Score 50 + Bonus |   #{@score_card[:Yahtzee] ? @score_card[:Yahtzee] : "  "}"
-    puts "| Total of Lower    |      ---->       |   #{lower_section_complete? ? @lower_total : "  "}           "
-    puts "| Total of Upper    |      ---->       |   #{upper_section_complete? ? @upper_total : "  "}           "
-    puts "| GRAND TOTAL       |      ---->       |   #{upper_section_complete? && lower_section_complete? ? @upper_total + @lower_total : "  "}           "
-
-  end
 
 
 
@@ -230,6 +251,7 @@ class Board
 
 //
 end
+
 
 
 
