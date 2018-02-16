@@ -22,6 +22,8 @@ class Board
   def initialize(score_card = new_score_card)
     @score_card = score_card
     @yahtzee = false
+    @upper_score = nil
+    @bonus = nil
   end
 
   def aces(dice)
@@ -135,9 +137,17 @@ class Board
     end
   end
 
+  def upper_section_complete?
+    [@score_card[:Aces], @score_card[:Twos], @score_card[:Threes], @score_card[:Fours],
+    @score_card[:Fives], @score_card[:Sixes]].all? { |x| !!x }
+  end
+
   def upper_section
+    @upper_score =
     @score_card[:Aces] + @score_card[:Twos] + @score_card[:Threes] + @score_card[:Fours] +
     @score_card[:Fives] + @score_card[:Sixes]
+
+    @bonus = @upper_score > 63 ? 35 : 0
   end
 
   def lower_section
@@ -162,8 +172,15 @@ class Board
   end
 
   def display
-    print "| Upper Section | How To Score | Points |"
-
+    puts "| Upper Section     | How To Score | Points "
+    puts "| Aces 1            | Add All 1s   |   #{@score_card[:Aces] ? @score_card[:Aces] : "  "}     "
+    puts "| Twos 2            | Add All 2s   |   #{@score_card[:Twos] ? @score_card[:Twos] : "  "}     "
+    puts "| Threes 3          | Add All 3s   |   #{@score_card[:Threes] ? @score_card[:Threes] : "  "}     "
+    puts "| Fours 4           | Add All 4s   |   #{@score_card[:Fours] ? @score_card[:Fours] : "  "}     "
+    puts "| Fives 5           | Add All 5s   |   #{@score_card[:Fives] ? @score_card[:Fives] : "  "}     "
+    puts "| Sixes 6           | Add All 6s   |   #{@score_card[:Sixes] ? @score_card[:Sixes] : "  "}     "
+    puts "| Total Score       |    ---->     |   #{upper_section_complete? ? @upper_score : "  "}     "
+    puts "| Bonus total > 63  |   Score 35   |              "
   end
 
 
