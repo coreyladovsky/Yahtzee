@@ -20,9 +20,28 @@ class HumanPlayer
     dice = gets.chomp.split(", ")
   end
 
-  def select_move
+  def select_move(dice)
     puts "Please select the move you wish to make"
-    gets.chomp
+    input = gets.chomp
+    case input
+    when "a"
+      self.board.aces(dice)
+    when "b"
+      self.board.twos(dice)
+          # "c" => @current_player.board.threes(@dice),
+          # "d" => @current_player.board.fours(@dice),
+          # "e" => @current_player.board.fives(@dice),
+          # "f" => @current_player.board.sixes(@dice),
+          # "g" => @current_player.board.three_of_a_kind(@dice),
+          # "h" => @current_player.board.four_of_a_kind(@dice),
+          # "i" => @current_player.board.full_house(@dice),
+          # "j" => @current_player.board.small_straight(@dice),
+          # "k" => @current_player.board.large_straight(@dice),
+          # "l" => @current_player.board.yahtzee(@dice),
+          # "m" => @current_player.board.chance(@dice)
+        else
+          return
+        end
   end
 
 

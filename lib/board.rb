@@ -1,6 +1,6 @@
 require 'byebug'
 class Board
-  attr_reader :score_card
+  attr_reader :score_card, :yahtzee
   def new_score_card
     {
       Aces: nil,
