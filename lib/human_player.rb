@@ -21,6 +21,7 @@ class HumanPlayer
   end
 
   def select_move
+    puts "Please select the move you wish to make"
     gets.chomp
   end
 

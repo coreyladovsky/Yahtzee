@@ -53,6 +53,8 @@ class Game
     roll_die(dice_to_roll.map! { |key| @dice[key] })
     display_all_die
     @current_player.select_move
+
+    @current_player.finish_turn
   end
 
   def roll_die(dice)
