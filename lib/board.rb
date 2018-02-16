@@ -210,6 +210,8 @@ class Board
     puts " -------------------------------------------------------------"
     puts "     l      | YAHTZEE           | Score 50 + Bonus |   #{@score_card[:Yahtzee] ? @score_card[:Yahtzee] : "  "}"
     puts " -------------------------------------------------------------"
+    puts "     m      | Chance            |   Add All Die    |   #{@score_card[:Chance] ? @score_card[:Chance] : "  "}"
+    puts " -------------------------------------------------------------"
     puts "  --------  | Total of Lower    |      ---->       |   #{lower_section_complete? ? @lower_total : "  "}           "
     puts " -------------------------------------------------------------"
     puts "  --------  | Total of Upper    |      ---->       |   #{upper_section_complete? ? @upper_total : "  "}           "
