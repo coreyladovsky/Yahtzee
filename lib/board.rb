@@ -120,6 +120,12 @@ class Board
     @score_card[:Chance] = dice.reduce(:+)
   end
 
+  def yahtzee?(dice)
+    if dice.all? { |die| die == dice[0] } && @yahtzee
+      yahtzee(dice)
+    end
+  end
+
   def yahtzee(dice)
     five_die_error_check(dice)
     if dice.all? { |die| die == dice[0] }

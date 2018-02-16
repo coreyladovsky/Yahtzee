@@ -15,6 +15,14 @@ class HumanPlayer
     @turns == 0
   end
 
+  def get_dice
+    puts "Please select the die you wish to keep, seperated by commas"
+    dice = gets.chomp.split(", ")
+  end
+
+  def select_move
+    gets.chomp
+  end
 
 
 end

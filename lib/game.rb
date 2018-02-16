@@ -28,15 +28,31 @@ class Game
 
   end
 
-  def take_turn
-    puts "It's #{@current_player.name} turn"
+  def show_score_card
     puts "Your score card looks like this"
     @current_player.board.display
-    puts "Here are the results of your first die roll"
-    roll_die(@dice.valuesß)
-    display_all_die
-    puts "select the die by name, seperated by commas"
+  end
 
+  def take_turn
+    puts "It's #{@current_player.name} turn"
+    show_score_card
+    puts "Here are the results of your first die roll"
+    roll_die(@dice.values)
+    display_all_die
+    dice_to_keep = @current_player.get_dice
+    show_score_card
+    puts "Here are the results of your second roll"
+    dice_to_roll = @dice.keys - dice_to_keep
+    roll_die(dice_to_roll.map! { |key| @dice[key] })
+    display_all_die
+    dice_to_keep = @current_player.get_dice
+    puts "Your score card looks like this"
+    @current_player.board.display
+    puts "Here are the results of your third roll"
+    dice_to_roll = @dice.keys - dice_to_keep
+    roll_die(dice_to_roll.map! { |key| @dice[key] })
+    display_all_die
+    @current_player.select_move
   end
 
   def roll_die(dice)
