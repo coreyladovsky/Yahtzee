@@ -161,4 +161,34 @@ class Board
     raise "Must be Five Dice!" unless dice.length == 5
   end
 
+  def display
+    print "| Upper Section | How To Score | Points |"
+
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
 end
+
+
+
+#
