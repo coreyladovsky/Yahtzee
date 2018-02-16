@@ -1,4 +1,5 @@
 require "die"
+require "board"
 
 class Game
 
@@ -11,5 +12,5 @@ class Game
     @players = players
   end
 
-  
+
 end
