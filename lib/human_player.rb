@@ -5,6 +5,7 @@ class HumanPlayer
     @name = name
     @board = Board.new
     @turns = 13
+    @yahtzee = false
   end
 
   def finish_turn
@@ -48,7 +49,11 @@ class HumanPlayer
     when  "k"
        self.board.large_straight(dice)
     when  "l"
+      if @yahtzee
+        raise "Yahtzee already chosen, bonus yahtzee's will be added to your final score"
+      end
        self.board.yahtzee(dice)
+       @yahtzee = true
     when  "m"
        self.board.chance(dice)
     else
