@@ -75,7 +75,7 @@ class Game
     dice_to_roll = @dice.keys - dice_to_keep
     roll_die(dice_to_roll.map! { |key| @dice[key] })
     display_all_die
-    @current_player.select_move(@dice)
+    @current_player.select_move(@dice.values)
     @current_player.finish_turn
   end
 

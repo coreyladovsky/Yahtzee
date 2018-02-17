@@ -17,10 +17,11 @@ class HumanPlayer
 
   def get_dice
     puts "Please select the die you wish to keep, seperated by commas"
-    dice = gets.chomp.split(", ")
+    gets.chomp.split(", ")
   end
 
   def select_move(dice)
+    dice = dice.map(&:value)
     puts "Please select the move you wish to make"
     input = gets.chomp
     case input
@@ -28,20 +29,31 @@ class HumanPlayer
       self.board.aces(dice)
     when "b"
       self.board.twos(dice)
-          # "c" => @current_player.board.threes(@dice),
-          # "d" => @current_player.board.fours(@dice),
-          # "e" => @current_player.board.fives(@dice),
-          # "f" => @current_player.board.sixes(@dice),
-          # "g" => @current_player.board.three_of_a_kind(@dice),
-          # "h" => @current_player.board.four_of_a_kind(@dice),
-          # "i" => @current_player.board.full_house(@dice),
-          # "j" => @current_player.board.small_straight(@dice),
-          # "k" => @current_player.board.large_straight(@dice),
-          # "l" => @current_player.board.yahtzee(@dice),
-          # "m" => @current_player.board.chance(@dice)
-        else
-          return
-        end
+    when "c"
+      self.board.threes(dice)
+    when  "d"
+       self.board.fours(dice)
+    when  "e"
+       self.board.fives(dice)
+    when  "f"
+       self.board.sixes(dice)
+    when  "g"
+       self.board.three_of_a_kind(dice)
+    when  "h"
+       self.board.four_of_a_kind(dice)
+    when  "i"
+       self.board.full_house(dice)
+    when  "j"
+       self.board.small_straight(dice)
+    when  "k"
+       self.board.large_straight(dice)
+    when  "l"
+       self.board.yahtzee(dice)
+    when  "m"
+       self.board.chance(dice)
+    else
+        raise "Invalid Move"
+    end
   end
 
 
