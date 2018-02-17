@@ -146,8 +146,14 @@ class Board
   end
 
   def upper_section_complete?
-    [@score_card[:Aces], @score_card[:Twos], @score_card[:Threes], @score_card[:Fours],
+
+    complete = [@score_card[:Aces], @score_card[:Twos], @score_card[:Threes], @score_card[:Fours],
     @score_card[:Fives], @score_card[:Sixes]].all? { |x| !!x }
+
+    if complete
+      upper_section
+    end
+    complete
   end
 
   def upper_section
@@ -164,8 +170,14 @@ class Board
   end
 
   def lower_section_complete?
-    [@score_card[:Three_of_a_kind], @score_card[:Four_of_a_kind], @score_card[:Full_house], @score_card[:Small_straight],
+
+    complete = [@score_card[:Three_of_a_kind], @score_card[:Four_of_a_kind], @score_card[:Full_house], @score_card[:Small_straight],
     @score_card[:Large_straight], @score_card[:Yahtzee], @score_card[:Chance]].all? { |x| !!x }
+
+    if complete
+      lower_section
+    end
+    complete
   end
 
   def lower_section
@@ -214,9 +226,9 @@ class Board
     puts " -------------------------------------------------------------"
     puts "  --------  | Total of Lower    |      ---->       |   #{lower_section_complete? ? @lower_total : "  "}           "
     puts " -------------------------------------------------------------"
-    puts "  --------  | Total of Upper    |      ---->       |   #{upper_section_complete? ? @upper_total : "  "}           "
+    puts "  --------  | Total of Upper    |      ---->       |   #{upper_section_complete? ? upper_total : "  "}           "
     puts " -------------------------------------------------------------"
-    puts "  --------  | GRAND TOTAL       |      ---->       |   #{upper_section_complete? && lower_section_complete? ? @upper_total + @lower_total : "  "}           "
+    puts "  --------  | GRAND TOTAL       |      ---->       |   #{upper_section_complete? && lower_section_complete? ? upper_total + @lower_score : "  "}           "
     puts " -------------------------------------------------------------"
   end
 

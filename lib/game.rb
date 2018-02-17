@@ -12,21 +12,6 @@ class Game
               "e" => Die.new }
     @players = players
     @current_player = @players[0]
-    @moves = {
-      # "a" => @current_player.board.aces(@dice),
-      # "b" => @current_player.board.twos(@dice),
-      # "c" => @current_player.board.threes(@dice),
-      # "d" => @current_player.board.fours(@dice),
-      # "e" => @current_player.board.fives(@dice),
-      # "f" => @current_player.board.sixes(@dice),
-      # "g" => @current_player.board.three_of_a_kind(@dice),
-      # "h" => @current_player.board.four_of_a_kind(@dice),
-      # "i" => @current_player.board.full_house(@dice),
-      # "j" => @current_player.board.small_straight(@dice),
-      # "k" => @current_player.board.large_straight(@dice),
-      # "l" => @current_player.board.yahtzee(@dice),
-      # "m" => @current_player.board.chance(@dice)
-    }
   end
 
   def switch_players!
@@ -44,7 +29,7 @@ class Game
   end
 
   def ending_screen
-    puts "Good game everyone! Here's your final boards!"
+    puts "Good game everyone! Here's your final board(s)!"
     @players.each do |player|
       puts "#{player.name}'s board: "
       player.board.display
