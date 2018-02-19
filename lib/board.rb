@@ -30,15 +30,13 @@ class Board
 
   def aces(dice)
     already_used_error(:Aces)
-    five_die_error_check(dice)
-    yahtzee?(dice)
+    checks(dice)
     @score_card[:Aces] = number_sum(dice, 1)
   end
 
   def twos(dice)
     already_used_error(:Twos)
-    five_die_error_check(dice)
-    yahtzee?(dice)
+    checks(dice)
     @score_card[:Twos] = number_sum(dice, 2)
   end
 
@@ -51,8 +49,7 @@ class Board
 
   def fours(dice)
     already_used_error(:Fours)
-    five_die_error_check(dice)
-    yahtzee?(dice)
+    checks(dice)
     @score_card[:Fours] = number_sum(dice, 4)
   end
 
@@ -65,8 +62,7 @@ class Board
 
   def sixes(dice)
     already_used_error(:Sixes)
-    five_die_error_check(dice)
-    yahtzee?(dice)
+    checks(dice)
     @score_card[:Sixes] = number_sum(dice, 6)
   end
 
@@ -87,9 +83,8 @@ class Board
   end
 
   def full_house(dice)
-    five_die_error_check(dice)
     already_used_error(:Full_house)
-    yahtzee?(dice)
+    checks(dice)
     sorted_dice = dice.sort
     dice_hash = Hash.new(0)
     sorted_dice.each { |num| dice_hash[num] += 1 }
@@ -101,9 +96,8 @@ class Board
   end
 
   def small_straight(dice)
-    five_die_error_check(dice)
     already_used_error(:Small_straight)
-    yahtzee?(dice)
+    checks(dice)
     sorted_dice = dice.sort.uniq
     small_straight = false
     possibles = [[1, 2, 3, 4,], [2, 3, 4, 5], [3, 4, 5, 6]]
@@ -117,18 +111,16 @@ class Board
   end
 
   def large_straight(dice)
-    five_die_error_check(dice)
     already_used_error(:Large_straight)
-    yahtzee?(dice)
+    checks(dice)
     sorted_dice = dice.sort.uniq
     sorted_dice == [1, 2, 3, 4, 5] || sorted_dice == [2, 3, 4, 5, 6] ?
     @score_card[:Large_straight] = 40 : @score_card[:Large_straight] = 0
   end
 
   def chance(dice)
-    five_die_error_check(dice)
     already_used_error(:Chance)
-    yahtzee?(dice)
+    checks(dice)
     @score_card[:Chance] = dice.reduce(:+)
   end
 
@@ -265,7 +257,7 @@ class Board
       yahtzee(dice)
     end
   end
-  
+
   def five_die_error_check(dice)
     raise "Must be Five Dice!" unless dice.length == 5
   end
