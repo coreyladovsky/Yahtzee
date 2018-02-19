@@ -1,7 +1,7 @@
 class HumanPlayer
 
   attr_reader :name, :board
-  def initialize(name="Corey")
+  def initialize(name = "Corey")
     @name = name
     @board = Board.new
     @turns = 13
@@ -51,9 +51,10 @@ class HumanPlayer
     when  "l"
       if @yahtzee
         raise "Yahtzee already chosen, bonus yahtzee's will be added to your final score"
-      end
+      else
        self.board.yahtzee(dice)
        @yahtzee = true
+     end
     when  "m"
        self.board.chance(dice)
     else

@@ -132,11 +132,6 @@ class Board
     @score_card[:Chance] = dice.reduce(:+)
   end
 
-  def yahtzee?(dice)
-    if dice.all? { |die| die == dice[0] } && @yahtzee
-      yahtzee(dice)
-    end
-  end
 
   def yahtzee(dice)
     five_die_error_check(dice)
@@ -250,6 +245,11 @@ class Board
 
   private
 
+  def checks(dice)
+    five_die_error_check(dice)
+    yahtzee?(dice)
+  end
+
   def already_used_error(sym)
     raise "Already Been Selected!" unless @score_card[sym].nil?
   end
@@ -260,6 +260,12 @@ class Board
     sum
   end
 
+  def yahtzee?(dice)
+    if dice.all? { |die| die == dice[0] } && @yahtzee
+      yahtzee(dice)
+    end
+  end
+  
   def five_die_error_check(dice)
     raise "Must be Five Dice!" unless dice.length == 5
   end
