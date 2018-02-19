@@ -29,62 +29,49 @@ class Board
   end
 
   def aces(dice)
-    already_used_error(:Aces)
-    checks(dice)
+    checks(dice, :Aces)
     @score_card[:Aces] = number_sum(dice, 1)
   end
 
   def twos(dice)
-    already_used_error(:Twos)
-    checks(dice)
+    checks(dice, :Twos)
     @score_card[:Twos] = number_sum(dice, 2)
   end
 
   def threes(dice)
-    already_used_error(:Threes)
-    five_die_error_check(dice)
-    yahtzee?(dice)
+    checks(dice, :Threes)
     @score_card[:Threes] = number_sum(dice, 3)
   end
 
   def fours(dice)
-    already_used_error(:Fours)
-    checks(dice)
+    checks(dice, :Fours)
     @score_card[:Fours] = number_sum(dice, 4)
   end
 
   def fives(dice)
-    already_used_error(:Fives)
-    five_die_error_check(dice)
-    yahtzee?(dice)
+    checks(dice, :Fives)
     @score_card[:Fives] = number_sum(dice, 5)
   end
 
   def sixes(dice)
-    already_used_error(:Sixes)
-    checks(dice)
+    checks(dice, :Sixes)
     @score_card[:Sixes] = number_sum(dice, 6)
   end
 
   def three_of_a_kind(dice)
-    five_die_error_check(dice)
-    already_used_error(:Three_of_a_kind)
-    yahtzee?(dice)
+    checks(dice, :Three_of_a_kind)
     @score_card[:Three_of_a_kind] = dice.count(dice.sort[2]) >= 3 ?
       dice.reduce(:+) : 0
   end
 
   def four_of_a_kind(dice)
-    five_die_error_check(dice)
-    already_used_error(:Four_of_a_kind)
-    yahtzee?(dice)
+    checks(:Four_of_a_kind)
     @score_card[:Four_of_a_kind] = dice.count(dice.sort[2]) >= 4 ?
       dice.reduce(:+) : 0
   end
 
   def full_house(dice)
-    already_used_error(:Full_house)
-    checks(dice)
+    checks(dice, :Full_house)
     sorted_dice = dice.sort
     dice_hash = Hash.new(0)
     sorted_dice.each { |num| dice_hash[num] += 1 }
@@ -96,8 +83,7 @@ class Board
   end
 
   def small_straight(dice)
-    already_used_error(:Small_straight)
-    checks(dice)
+    checks(dice, :Small_straight)
     sorted_dice = dice.sort.uniq
     small_straight = false
     possibles = [[1, 2, 3, 4,], [2, 3, 4, 5], [3, 4, 5, 6]]
@@ -111,16 +97,14 @@ class Board
   end
 
   def large_straight(dice)
-    already_used_error(:Large_straight)
-    checks(dice)
+    checks(dice, :Large_straight)
     sorted_dice = dice.sort.uniq
     sorted_dice == [1, 2, 3, 4, 5] || sorted_dice == [2, 3, 4, 5, 6] ?
     @score_card[:Large_straight] = 40 : @score_card[:Large_straight] = 0
   end
 
   def chance(dice)
-    already_used_error(:Chance)
-    checks(dice)
+    checks(dice, :Chance)
     @score_card[:Chance] = dice.reduce(:+)
   end
 
@@ -237,9 +221,10 @@ class Board
 
   private
 
-  def checks(dice)
+  def checks(dice, sym)
     five_die_error_check(dice)
     yahtzee?(dice)
+    already_used_error(sym)
   end
 
   def already_used_error(sym)
