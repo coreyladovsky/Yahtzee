@@ -129,7 +129,6 @@ class Board
   end
 
   def upper_section_complete?
-
     complete = [@score_card[:Aces], @score_card[:Twos], @score_card[:Threes], @score_card[:Fours],
     @score_card[:Fives], @score_card[:Sixes]].all? { |x| !!x }
 
