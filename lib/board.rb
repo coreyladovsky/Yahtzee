@@ -65,7 +65,7 @@ class Board
   end
 
   def four_of_a_kind(dice)
-    checks(:Four_of_a_kind)
+    checks(dice, :Four_of_a_kind)
     @score_card[:Four_of_a_kind] = dice.count(dice.sort[2]) >= 4 ?
       dice.reduce(:+) : 0
   end
