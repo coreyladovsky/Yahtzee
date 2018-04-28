@@ -50,12 +50,12 @@ class Game
     dice_to_keep = @current_player.get_dice
     show_score_card
     puts "Here are the results of your second roll"
-    second_and_thrid_roll
+    second_and_thrid_roll(dice_to_keep)
     dice_to_keep = @current_player.get_dice
     puts "Your score card looks like this"
     @current_player.board.display
     puts "Here are the results of your third roll"
-    second_and_thrid_roll
+    second_and_thrid_roll(dice_to_keep)
     @current_player.select_move(@dice.values)
     @current_player.finish_turn
   end
@@ -64,7 +64,7 @@ class Game
     dice.each(&:roll)
   end
 
-  def second_and_thrid_roll
+  def second_and_thrid_roll(dice_to_keep)
     dice_to_roll = @dice.keys - dice_to_keep
     roll_die(dice_to_roll.map! { |key| @dice[key] })
     display_all_die
